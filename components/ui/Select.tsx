@@ -209,7 +209,6 @@ export function Select({
           tabIndex={-1}
           aria-labelledby={buttonId}
           onKeyDown={handleListKey}
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
           className={[
             "absolute z-50 mt-1 w-full max-h-60 overflow-y-auto",
             "rounded-[var(--radius-card)] border border-[var(--color-border-light)]",

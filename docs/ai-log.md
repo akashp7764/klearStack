@@ -36,7 +36,27 @@
 
 ## Phase 02 — Header & Navigation
 
-*To be filled in Phase 02*
+**Date**: 2026-09-24
+
+### Decisions Made
+1. **Nav structure** extracted from Figma screenshots: Product▼, Solutions▼ (mega menu), Industries▼, Pricing (link), Resources▼, Company▼
+2. **Solutions mega menu**: Left column = Capabilities/Features/Integration/Document Types (with blue checkmark icons); Right column = Data Processing→ (bold linked heading), Data Extraction, Data Interpretation, Straight Through Processing (STP)
+3. **Two CTAs**: "Try it for Free" (secondary/outlined) + "Get Free Demo →" (primary/navy filled) — both scroll to #contact
+4. **Active item**: "Solutions" highlighted in blue with underline (as seen in Figma)
+5. **Single-open-at-a-time** desktop menus: state held in Header.tsx, passed to Dropdown/MegaMenu as `isOpen`
+6. **Panel pattern**: panels are mounted in DOM always, shown/hidden via `visibility + opacity + translateY + scale` — this allows the 120ms close animation to play
+7. **Layout-shift prevention**: A `<div aria-hidden>` of `HEADER_HEIGHT=68px` sits in normal flow; header is `position: fixed` on top of it
+8. **useReducer** used for mobile accordion state instead of multiple useState calls
+
+### Assumptions (logged per rules)
+- **Sticky header**: ASSUMED YES — transparent (white/95%) → solid white + shadow after scrollY > 8px. Design screenshots showed only static state; sticky confirmed as industry standard for this type of page.
+- **Logo**: KlearStack spark/lightning SVG + wordmark. Exact Figma SVG not provided; recreated from screenshot analysis.
+- **Hover style**: chevron rotate (180°) + text color change to `#2563EB` (link blue), matching the blue-underlined active state visible in screenshots.
+- **Active item**: "Solutions" assumed active (shown highlighted/underlined in Figma)
+
+### Issues & Fixes
+- Initial MobileDrawer used `require("react").useReducer` hack → refactored to proper top-level `useReducer` import
+
 
 ---
 
