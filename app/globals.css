@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+/* ─── KlearStack Design Tokens ─────────────────────────────────────────────── */
+@theme inline {
+  /* Colors */
+  --color-primary:        #1B2B6B;
+  --color-primary-dark:   #0F1F50;
+  --color-primary-light:  #2D47A0;
+  --color-accent:         #F97316;
+  --color-accent-dark:    #EA6B00;
+  --color-link:           #2563EB;
+  --color-link-hover:     #1D4ED8;
+
+  --color-bg-base:        #EBF0FA;
+  --color-bg-section:     #F0F5FD;
+  --color-surface:        #FFFFFF;
+  --color-surface-alt:    #F8FAFF;
+  --color-footer-bg:      #D9E8F8;
+  --color-banner-bg:      #E0EBFB;
+
+  --color-text-dark:      #0F172A;
+  --color-text-body:      #1E293B;
+  --color-text-muted:     #64748B;
+  --color-text-subtle:    #94A3B8;
+  --color-text-inverse:   #FFFFFF;
+
+  --color-border:         #CBD5E1;
+  --color-border-light:   #E2E8F0;
+
+  --color-success:        #22C55E;
+  --color-success-bg:     #F0FDF4;
+  --color-error:          #EF4444;
+  --color-error-bg:       #FEF2F2;
+  --color-warning:        #F59E0B;
+
+  /* Font Families */
+  --font-heading: var(--font-inter), 'Inter', sans-serif;
+  --font-body:    var(--font-inter), 'Inter', sans-serif;
+  --font-sans:    var(--font-inter), 'Inter', sans-serif;
+
+  /* Font Sizes — h1/h2/h3/body/small */
+  --font-size-display: 3rem;        /* 48px */
+  --font-size-h1:      2.25rem;     /* 36px */
+  --font-size-h2:      1.875rem;    /* 30px */
+  --font-size-h3:      1.25rem;     /* 20px */
+  --font-size-body:    1rem;        /* 16px */
+  --font-size-sm:      0.875rem;    /* 14px */
+  --font-size-xs:      0.75rem;     /* 12px */
+
+  /* Border Radius */
+  --radius-btn:    0.5rem;    /* 8px — buttons */
+  --radius-input:  0.5rem;    /* 8px — inputs */
+  --radius-card:   0.75rem;   /* 12px — cards */
+  --radius-pill:   9999px;    /* pill badges */
+  --radius-lg:     1rem;      /* 16px — large cards */
+
+  /* Shadows */
+  --shadow-card:     0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-dropdown: 0 10px 30px -5px rgb(27 43 107 / 0.15), 0 4px 6px -2px rgb(27 43 107 / 0.08);
+  --shadow-header:   0 2px 12px 0 rgb(27 43 107 / 0.10);
+  --shadow-btn:      0 4px 14px 0 rgb(27 43 107 / 0.25);
+
+  /* Container */
+  --container-max:    1280px;
+  --container-pad-xl: 2rem;      /* desktop */
+  --container-pad-md: 1.5rem;    /* tablet */
+  --container-pad-sm: 1rem;      /* mobile */
+}
+
+/* ─── Root Variables ─────────────────────────────────────────────────────── */
+:root {
+  --background: #EBF0FA;
+  --foreground: #0F172A;
+}
+
+/* ─── Global Reset & Base ────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* scroll-behavior: smooth only when user has no motion preference */
+  scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-body);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: 1.625;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Skip Link ──────────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 0 0 var(--radius-btn) var(--radius-btn);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.1s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ─── Focus Visible Ring ─────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ─── Marquee Animation ──────────────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  will-change: transform;
+  animation: marquee-scroll 28s linear infinite;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ─── Typography Utilities ───────────────────────────────────────────────── */
+.text-display {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-h1 {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.text-h2 {
+  font-size: clamp(1.375rem, 3vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.text-h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ─── Container ──────────────────────────────────────────────────────────── */
+.container-page {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad-sm);
+}
+
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: var(--container-pad-md);
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-page {
+    padding-inline: var(--container-pad-xl);
+  }
+}
+
+/* ─── Tabular Numbers ────────────────────────────────────────────────────── */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
